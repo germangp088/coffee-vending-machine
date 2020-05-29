@@ -1,18 +1,21 @@
 import IProduct from "../types/product";
+import * as uuid from 'uuid';
 
 export class VendingMachine {
     private _coffe: IProduct;
     private _extras: IProduct[];
     private _combinations: IProduct[][] = [];
+    private _products: IProduct[] = [];
+    private _cash: number = 0;
 
     constructor() {
       this.build()
     }
 
     private build() {
-      this._coffe = { name: "Coffe", price: 3 };
-      this._extras = [{ name: "Milk", price: 1.3 }, { name: "Cocoa", price: 1.5 },
-      { name: "Chocolate", price: 1.7 }, { name: "Rum", price: 2 }];
+      this._coffe = { id: '1', name: "Coffe", price: 3 };
+      this._extras = [{ id: '2', name: "Milk", price: 1.3 }, { id: '3', name: "Cocoa", price: 1.5 },
+      { id: '4', name: "Chocolate", price: 1.7 }, { id: '5', name: "Rum", price: 2 }];
 
       const combinationsSize = Math.pow(this._extras.length, 2);
       for (let p = 0; p < combinationsSize; p++) {
@@ -78,15 +81,38 @@ export class VendingMachine {
             }
           }
         }
-        const actualSize = this._combinations.filter(x => x.length > 0).length
+        const actualSize = this._combinations.filter(x => x.length > 0).length;
         if(this._combinations.filter(x => x.length === 0).length > 0){
           createCombinations(actualSize);
         }
       }
+
       createCombinations(0);
+
+      this._combinations.forEach((combination: IProduct[]) => {
+        let product: IProduct = { id: uuid.v4(), name: "", price: 0 };
+        combination.forEach((c: IProduct) => {
+          product.name += `${c.name}, `;
+          product.price += c.price;
+        });
+        product.name = product.name.trim().slice(0, -1);
+        this._products.push(product);
+      });
+
+      this._products.sort(function(a, b) {
+        return a.price - b.price;
+      });
     }
 
-    get combinations() {
-      return this._combinations;
+    get products() {
+      return this._products;
+    }
+
+    get cash() {
+      return this._cash;
+    }
+
+    set cash(value: number) {
+      this._cash = value;
     }
 }

@@ -42,7 +42,8 @@
     "react-scripts": "latest",
     "react-text-mask": "^5.4.3",
     "superagent": "^5.2.2",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.3",
+    "uuid": "^8.1.0"
   },
   "engines": {
     "node": ">=10.19.0",
