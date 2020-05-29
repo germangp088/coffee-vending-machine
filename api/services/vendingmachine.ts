@@ -15,7 +15,8 @@ export class VendingMachine {
     private build() {
       this._coffe = { id: '1', name: "Coffe", price: 3 };
       this._extras = [{ id: '2', name: "Milk", price: 1.3 }, { id: '3', name: "Cocoa", price: 1.5 },
-      { id: '4', name: "Chocolate", price: 1.7 }, { id: '5', name: "Rum", price: 2 }];
+      { id: '4', name: "Chocolate", price: 1.7 }, { id: '5', name: "Rum", price: 2 },
+      { id: '6', name: "Grapes", price: 2 }];
 
       // Get size about possible combinations.
       const combinationsSize = Math.pow(this._extras.length, 2);

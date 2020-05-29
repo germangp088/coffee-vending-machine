@@ -32,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginBottom: theme.spacing(3),
+    marginTop: theme.spacing(3),
+    padding: theme.spacing(2),
   },
 }));
 
@@ -39,7 +41,7 @@ const VendingMachine = (props) => {
     const classes = useStyles();
     return (
         <div>
-          <Grid container className={classes.title}>
+          <Grid container component={Paper} className={classes.title} align="center">
             <Grid item xs={12} >
               <Typography variant="h5" className="header-message">Vending Machine</Typography>
             </Grid>
