@@ -18,7 +18,6 @@ router.get('/cash', (_req: express.Request, res: express.Response) => {
 });
 
 router.post('/cash', (req: express.Request, res: express.Response) => {
-  console.log(req.body)
   if(!req.body.price || isNaN(req.body.price)) {
     res.status(400).end();
   } else {
