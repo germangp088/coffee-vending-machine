@@ -17,11 +17,13 @@ export class VendingMachine {
       this._extras = [{ id: '2', name: "Milk", price: 1.3 }, { id: '3', name: "Cocoa", price: 1.5 },
       { id: '4', name: "Chocolate", price: 1.7 }, { id: '5', name: "Rum", price: 2 }];
 
+      // Get size about possible combinations.
       const combinationsSize = Math.pow(this._extras.length, 2);
       for (let p = 0; p < combinationsSize; p++) {
         this._combinations.push([]);        
       }
 
+      // Check if the combination was added.
       const exists = (combination: IProduct[]) => {
         let exists = false;
         this._combinations.forEach(c => {
@@ -32,6 +34,7 @@ export class VendingMachine {
         return exists;
       }
 
+      // Shake extras to get different possitions to create and check new combinations.
       const shake = () => {
         const extras = JSON.parse(JSON.stringify(this._extras));
 
@@ -54,6 +57,8 @@ export class VendingMachine {
         const extras = shake();
         for (let i = init; i < combinationsSize; i++) {
           const combination: IProduct[] = []
+
+          //Every combination starts with a coffe
           combination.push(this._coffe);
   
           if(!exists(combination)) {
@@ -61,6 +66,7 @@ export class VendingMachine {
             continue;
           }
   
+          // Iterate extras to get combinations to check & add
           for (let j = 0; j < extras.length; j++) {
             const extra = extras[j];
             combination.push(extra);
@@ -69,6 +75,7 @@ export class VendingMachine {
               break;
             } else {
               if(j === extras.length-1) {
+                // If already exists the algorithm iterate over this combination to remove elements and check that new combination
                 for (let c = 1; c < combination.length; c++) {
                   combination.splice(c, 1);
                   if(!exists(combination)) {
@@ -81,14 +88,18 @@ export class VendingMachine {
             }
           }
         }
+
         const actualSize = this._combinations.filter(x => x.length > 0).length;
-        if(this._combinations.filter(x => x.length === 0).length > 0){
+
+        //If the matrix wasn't complete it will create new combinations recursivelly
+        if(this._combinations.filter(x => x.length === 0).length > 0) {
           createCombinations(actualSize);
         }
       }
 
       createCombinations(0);
 
+      // Parse combinations to crete new product like { name: 'Coffe, Milk, Cocoa', price: '5.8‬'}
       this._combinations.forEach((combination: IProduct[]) => {
         let product: IProduct = { id: uuid.v4(), name: "", price: 0 };
         combination.forEach((c: IProduct) => {
