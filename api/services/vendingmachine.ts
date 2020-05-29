@@ -42,6 +42,7 @@ export class VendingMachine {
           return Math.floor(Math.random() * extras.length);
         }
 
+        // Change extras position elements using the matrix size to increase probabilities to create a not tested extra shake.
         for (let e = 0; e < combinationsSize; e++) {
           const rndI = getRandomInt();
           const rndJ = getRandomInt();
