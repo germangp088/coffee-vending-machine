@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+    coffee-vending-machine:
+        stdin_open: true
+        tty: true
+        build:
+            context: .
+        ports:
+            - "8080:8080"
+            - "3000:3000"
+        volumes:
+            - /usr/src/app/node_modules
+            - ./src:/usr/src/app/src
+            - ./public:/usr/src/app/public
+            - ./api:/usr/src/app/api

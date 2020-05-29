@@ -17,6 +17,8 @@ const Extra = (props) => {
         return <FreeBreakfastIcon fontSize="small" />
       case "Rum":
         return <LocalBarIcon fontSize="small" />
+      default:
+        break;
     }
   }
 
