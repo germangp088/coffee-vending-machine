@@ -7,14 +7,16 @@ import Product from './Product';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
   vendingMachine: {
     width: '100%',
-    height: '80vh'
+    height: '80vh',
+    padding: theme.spacing(3, 3, 3, 3),
   },
   headBG: {
       backgroundColor: '#e0e0e0'
@@ -25,31 +27,41 @@ const useStyles = makeStyles({
   messageArea: {
     height: '70vh',
     overflowY: 'auto'
-  }
-});
+  },
+  buttom: {
+    width: '100%'
+  },
+  title: {
+    marginBottom: theme.spacing(3),
+  },
+}));
 
 const VendingMachine = (props) => {
     const classes = useStyles();
-
     return (
         <div>
-          <Grid container>
+          <Grid container className={classes.title}>
             <Grid item xs={12} >
               <Typography variant="h5" className="header-message">Vending Machine</Typography>
             </Grid>
           </Grid>
-          <Grid container component={Paper} className={classes.vendingMachine}>
-            <Grid item lg={12} md={6} xs={3}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend">Products</FormLabel>
-                  <RadioGroup aria-label="products" name="products1" value={props.id} onChange={(e) => props.handleChange(e)}>
-                    {
-                      props.products && props.products.map((product) => <Product key={`Product_${product.id}`} product={product} />)
-                    }
-                  </RadioGroup>
-              </FormControl>
-            </Grid>
-          </Grid>
+          <FormControl component="fieldset">
+              <RadioGroup aria-label="products" name="products1" value={props.id} onChange={(e) => props.handleChange(e)}>
+                <Grid container component={Paper} className={classes.vendingMachine}>
+                  <Grid item xs={12}>
+                    <Typography variant="h5" className="header-message">Price: $ {parseFloat(props.price).toFixed(2)}</Typography>
+                  </Grid>
+                  {
+                    props.products && props.products.map((product) => <Product key={`Product_${product.id}`} product={product} />)
+                  }
+                  <Grid item xs={12}>
+                    <Button variant="contained" color="primary" className={classes.buttom} onClick={props.onClick}>
+                      Buy
+                    </Button>
+                  </Grid>
+                </Grid>
+              </RadioGroup>
+          </FormControl>
         </div>
     );
 }

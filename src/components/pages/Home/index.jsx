@@ -14,7 +14,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       products: null,
-      id: null,
+      product: { price: 0},
       loading: true,
       errorMessage: '',
       notFound: false
@@ -47,7 +47,10 @@ class Home extends React.Component {
 
   handleChange = (event) => {
     console.log(event.target.value)
-    this.setState({ id: event.target.value });
+    const product = this.state.products.find(p => p.id === event.target.value);
+    this.setState({
+      product: product
+    });
   };
 
   render() {
@@ -59,7 +62,8 @@ class Home extends React.Component {
         </FormHelperText>
         <VendingMachine products={this.state.products}
           handleChange={this.handleChange}
-          id={this.state.id} />
+          id={this.state.product.id}
+          price={this.state.product.price} />
       </main>
     );
   }
