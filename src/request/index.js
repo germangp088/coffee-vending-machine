@@ -10,6 +10,15 @@ export const getProducts = async () => {
     }
 }
 
+export const getExtras = async () => {
+    try {
+        const res = await superagent.get(`${URL_API}extras`);
+        return res.body;
+    } catch(err) {
+        throw err
+    }
+}
+
 export const postCash = async (request) => {
     try {
         const res = await superagent.post(`${URL_API}cash`).send(request);

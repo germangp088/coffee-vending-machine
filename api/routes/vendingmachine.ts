@@ -9,6 +9,10 @@ router.get('/', (_req: express.Request, res: express.Response) => {
   res.status(200).json(vendingMachine.products)
 });
 
+router.get('/extras', (_req: express.Request, res: express.Response) => {
+  res.status(200).json(vendingMachine.extras)
+});
+
 router.get('/cash', (_req: express.Request, res: express.Response) => {
   res.status(200).json(vendingMachine.cash)
 });

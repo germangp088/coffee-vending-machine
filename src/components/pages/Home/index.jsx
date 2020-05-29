@@ -1,12 +1,13 @@
 import React from 'react';
 import { FormHelperText } from '@material-ui/core';
-import { getProducts, postCash } from "../../../request";
+import { getProducts, getExtras, postCash } from "../../../request";
 import Loading from '../../common/Loading';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 import VendingMachine from './VendingMachine';
 import Typography from '@material-ui/core/Typography';
+import Extras from './Extras';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -16,13 +17,15 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: null,
+      products: [],
       product: { id: '', price: 0 },
+      extras: [],
       loading: true,
       success: false,
       errorMessage: '',
       notFound: false
     };
+    this.getExtras = this.getExtras.bind(true);
     this.getProducts = this.getProducts.bind(true);
     this.handleChange = this.handleChange.bind(true);
     this.handleOnClick = this.handleOnClick.bind(true);
@@ -30,6 +33,7 @@ class Home extends React.Component {
 
   componentDidMount= async() => {
     await this.getProducts();
+    await this.getExtras();
   }
 
   handleClose = (event, reason) => {
@@ -50,6 +54,24 @@ class Home extends React.Component {
       const products = await getProducts();
       this.setState({
         products: products,
+        loading: false
+      });
+    } catch (error) {
+      this.setState({
+        errorMessage: error.message,
+        loading: false
+      });
+    }
+  }
+
+  getExtras = async() => {
+    try {
+      this.setState({
+        loading: true
+      });
+      const extras = await getExtras();
+      this.setState({
+        extras: extras,
         loading: false
       });
     } catch (error) {
@@ -98,6 +120,7 @@ class Home extends React.Component {
             <Typography variant="label" className="header-message">Take your coffe! <LocalCafeIcon fontSize='small' /></Typography>
           </Alert>
         </Snackbar>
+        <Extras extras={this.state.extras} />
         <VendingMachine products={this.state.products}
           handleChange={this.handleChange}
           handleOnClick={this.handleOnClick}

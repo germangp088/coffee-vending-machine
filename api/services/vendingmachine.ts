@@ -108,6 +108,10 @@ export class VendingMachine {
       return this._products;
     }
 
+    get extras() {
+      return this._extras;
+    }
+
     get cash() {
       return this._cash;
     }
