@@ -14,13 +14,6 @@ export class VendingMachine {
       this._extras = [{ name: "Milk", price: 1.3 }, { name: "Cocoa", price: 1.5 },
       { name: "Chocolate", price: 1.7 }, { name: "Rum", price: 2 }];
 
-      /*const timesToAdd = {
-        Milk: 8,
-        Cocoa: 8,
-        Chocolate: 8,
-        Rum: 8
-      }*/
-
       const combinationsSize = Math.pow(this._extras.length, 2);
       for (let p = 0; p < combinationsSize; p++) {
         this._combinations.push([]);        
@@ -35,25 +28,6 @@ export class VendingMachine {
         });
         return exists;
       }
-
-      /*const substractTimes = (combination: IProduct[]) => {
-        combination.forEach(element => {
-          switch (element.name) {
-            case "Milk":
-              timesToAdd.Milk -= 1;
-              break;
-            case "Cocoa":
-              timesToAdd.Cocoa -= 1;
-              break;
-            case "Chocolate":
-              timesToAdd.Chocolate -= 1;
-              break;
-            case "Rum":
-              timesToAdd.Rum -= 1;
-              break;
-          }
-        });
-      }*/
 
       const shake = () => {
         const extras = JSON.parse(JSON.stringify(this._extras));
@@ -86,27 +60,9 @@ export class VendingMachine {
   
           for (let j = 0; j < extras.length; j++) {
             const extra = extras[j];
-            /*if(extra.name === 'Milk' && timesToAdd.Milk > 0) {
-              combination.push(extra);
-            } else {
-              if(extra.name === 'Chocolate' && timesToAdd.Chocolate > 0) {
-                combination.push(extra);
-              } else {
-                if(extra.name === 'Cocoa' && timesToAdd.Cocoa > 0) {
-                  combination.push(extra);
-                } else {
-                  if(extra.name === 'Rum' && timesToAdd.Rum > 0) {
-                    combination.push(extra);
-                  } else {
-                    continue;
-                  }
-                }
-              }
-            }*/
             combination.push(extra);
             if(!exists(combination)) {
               this._combinations[i] = combination;
-              //substractTimes(combination);
               break;
             } else {
               if(j === extras.length-1) {
@@ -114,7 +70,6 @@ export class VendingMachine {
                   combination.splice(c, 1);
                   if(!exists(combination)) {
                     this._combinations[i] = combination;
-                    //substractTimes(combination);
                     break;
                   }
                 }
@@ -123,21 +78,12 @@ export class VendingMachine {
             }
           }
         }
-        console.log(this._combinations.length)
-        console.log(this._combinations)
-        //console.log(timesToAdd)
         const actualSize = this._combinations.filter(x => x.length > 0).length
-        /*if(timesToAdd.Milk > 0 || timesToAdd.Chocolate > 0 || timesToAdd.Cocoa > 0 || timesToAdd.Rum > 0) {
-          createCombinations(actualSize);
-        }*/
         if(this._combinations.filter(x => x.length === 0).length > 0){
           createCombinations(actualSize);
         }
       }
       createCombinations(0);
-      console.log(this._combinations.length)
-      console.log(this._combinations)
-      //console.log(timesToAdd)
     }
 
     get combinations() {
