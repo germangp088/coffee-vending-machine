@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Product from './Product';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({

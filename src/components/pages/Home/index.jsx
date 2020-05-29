@@ -2,8 +2,11 @@ import React from 'react';
 import { FormHelperText } from '@material-ui/core';
 import { getProducts, postCash } from "../../../request";
 import Loading from '../../common/Loading';
+import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 import VendingMachine from './VendingMachine';
+import Typography from '@material-ui/core/Typography';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -16,6 +19,7 @@ class Home extends React.Component {
       products: null,
       product: { id: '', price: 0 },
       loading: true,
+      success: false,
       errorMessage: '',
       notFound: false
     };
@@ -27,6 +31,16 @@ class Home extends React.Component {
   componentDidMount= async() => {
     await this.getProducts();
   }
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({
+      success: false
+    });
+  };
 
   getProducts = async() => {
     try {
@@ -54,7 +68,8 @@ class Home extends React.Component {
       await postCash(this.state.product);
       this.setState({
         product: { id: '', price: 0 },
-        loading: false
+        loading: false,
+        success: true
       });
     } catch (error) {
       this.setState({
@@ -78,6 +93,11 @@ class Home extends React.Component {
         <FormHelperText error={true}>
           { this.state.errorMessage && <Alert severity="error">This is an error message!</Alert>}
         </FormHelperText>
+        <Snackbar open={this.state.success} autoHideDuration={6000} onClose={this.handleClose}>
+          <Alert onClose={this.handleClose} severity="success">
+            <Typography variant="label" className="header-message">Take your coffe! <LocalCafeIcon fontSize='small' /></Typography>
+          </Alert>
+        </Snackbar>
         <VendingMachine products={this.state.products}
           handleChange={this.handleChange}
           handleOnClick={this.handleOnClick}
