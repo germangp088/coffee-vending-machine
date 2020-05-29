@@ -14,7 +14,7 @@ router.get('/cash', (_req: express.Request, res: express.Response) => {
 });
 
 router.post('/cash', (req: express.Request, res: express.Response) => {
-  vendingMachine.cash += req.body;
+  vendingMachine.cash = parseFloat(eval(vendingMachine.cash.toString()) + eval(req.body.price)).toFixed(2);
   res.status(200).json(vendingMachine.cash);
 });
 

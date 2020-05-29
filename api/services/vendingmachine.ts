@@ -6,7 +6,7 @@ export class VendingMachine {
     private _extras: IProduct[];
     private _combinations: IProduct[][] = [];
     private _products: IProduct[] = [];
-    private _cash: number = 0;
+    private _cash: string = '0';
 
     constructor() {
       this.build()
@@ -112,7 +112,7 @@ export class VendingMachine {
       return this._cash;
     }
 
-    set cash(value: number) {
+    set cash(value: string) {
       this._cash = value;
     }
 }

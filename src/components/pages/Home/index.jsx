@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormHelperText } from '@material-ui/core';
-import { getProducts } from "../../../request";
+import { getProducts, postCash } from "../../../request";
 import Loading from '../../common/Loading';
 import MuiAlert from '@material-ui/lab/Alert';
 import VendingMachine from './VendingMachine';
@@ -14,13 +14,14 @@ class Home extends React.Component {
     super(props);
     this.state = {
       products: null,
-      product: { price: 0},
+      product: { id: '', price: 0 },
       loading: true,
       errorMessage: '',
       notFound: false
     };
     this.getProducts = this.getProducts.bind(true);
     this.handleChange = this.handleChange.bind(true);
+    this.handleOnClick = this.handleOnClick.bind(true);
   }
 
   componentDidMount= async() => {
@@ -45,8 +46,25 @@ class Home extends React.Component {
     }
   }
 
+  handleOnClick = async() => {
+    try {
+      this.setState({
+        loading: true
+      });
+      await postCash(this.state.product);
+      this.setState({
+        product: { id: '', price: 0 },
+        loading: false
+      });
+    } catch (error) {
+      this.setState({
+        errorMessage: error.message,
+        loading: false
+      });
+    }
+  };
+
   handleChange = (event) => {
-    console.log(event.target.value)
     const product = this.state.products.find(p => p.id === event.target.value);
     this.setState({
       product: product
@@ -62,6 +80,7 @@ class Home extends React.Component {
         </FormHelperText>
         <VendingMachine products={this.state.products}
           handleChange={this.handleChange}
+          handleOnClick={this.handleOnClick}
           id={this.state.product.id}
           price={this.state.product.price} />
       </main>
