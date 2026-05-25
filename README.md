@@ -15,6 +15,12 @@ $ npm run build
 $ npm run start
 ```
 
+### Lint
+
+```sh
+$ npm run lint
+```
+
 ## Run on Docker
 You can run the project using docker to avoid install dependencies, packages or node, the following commands will allow you to get the project running on a virtualize container.
 
