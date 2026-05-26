@@ -1,19 +1,36 @@
-# coffee-vending-machine
+# Coffee Vending Machine
 
-It's a coffe vending machine! serve yourself your favourite coffe combination!
+This is a simple coffee vending machine simulation.
 
-### Installation
+## Features
 
-```sh
-$ npm install
-```
+- Dispense various types of coffee.
+- Handle payments.
+- Track inventory.
 
-### Run
+## Setup
 
-```sh
-$ npm run build
-$ npm run start
-```
+To run this project, you need Node.js installed.
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/germangp088/coffee-vending-machine.git
+   cd coffee-vending-machine
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the application:
+   ```bash
+   npm start
+   ```
+
+## Usage
+
+Follow the prompts in the console to interact with the coffee machine.
 
 ## Run on Docker
 You can run the project with Docker to avoid installing Node or npm packages on your machine.
@@ -43,3 +60,7 @@ Remove stopped containers created by Docker Compose:
 ```sh
 docker-compose down
 ```
+
+## Contributing
+
+Feel free to open issues or pull requests.
