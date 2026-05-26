@@ -25,10 +25,10 @@ class Home extends React.Component {
       errorMessage: '',
       notFound: false
     };
-    this.getExtras = this.getExtras.bind(true);
-    this.getProducts = this.getProducts.bind(true);
-    this.handleChange = this.handleChange.bind(true);
-    this.handleOnClick = this.handleOnClick.bind(true);
+    this.getExtras = this.getExtras.bind(this);
+    this.getProducts = this.getProducts.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
   }
 
   componentDidMount= async() => {
@@ -51,9 +51,20 @@ class Home extends React.Component {
       this.setState({
         loading: true
       });
-      const products = await getProducts();
+      const products = await getProducts(); // API call to get products
+      let initialProduct = { id: '', price: 0 };
+      const lastSelectedCoffeeId = localStorage.getItem('lastSelectedCoffeeId');
+
+      if (lastSelectedCoffeeId) {
+        const storedProduct = products.find(p => p.id === lastSelectedCoffeeId);
+        if (storedProduct) {
+          initialProduct = storedProduct;
+        }
+      }
+
       this.setState({
         products: products,
+        product: initialProduct, // Set initial product based on localStorage or default
         loading: false
       });
     } catch (error) {
@@ -93,6 +104,7 @@ class Home extends React.Component {
         loading: false,
         success: true
       });
+      localStorage.removeItem('lastSelectedCoffeeId'); // Clear selection after purchase
     } catch (error) {
       this.setState({
         errorMessage: error.message,
@@ -106,6 +118,12 @@ class Home extends React.Component {
     this.setState({
       product: product
     });
+    // Save the selected product ID to localStorage
+    if (product) {
+      localStorage.setItem('lastSelectedCoffeeId', product.id);
+    } else {
+      localStorage.removeItem('lastSelectedCoffeeId');
+    }
   };
 
   render() {
