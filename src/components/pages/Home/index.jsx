@@ -18,7 +18,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       products: [],
-      product: { id: '', price: 0 },
+      product: { id: '', price: 0, name: '' },
       extras: [],
       loading: true,
       success: false,
@@ -52,7 +52,7 @@ class Home extends React.Component {
         loading: true
       });
       const products = await getProducts(); // API call to get products
-      let initialProduct = { id: '', price: 0 };
+      let initialProduct = { id: '', price: 0, name: '' };
       const lastSelectedCoffeeId = localStorage.getItem('lastSelectedCoffeeId');
 
       if (lastSelectedCoffeeId) {
@@ -100,7 +100,7 @@ class Home extends React.Component {
       });
       await postCash(this.state.product);
       this.setState({
-        product: { id: '', price: 0 },
+        product: { id: '', price: 0, name: '' },
         loading: false,
         success: true
       });
@@ -143,7 +143,8 @@ class Home extends React.Component {
           handleChange={this.handleChange}
           handleOnClick={this.handleOnClick}
           id={this.state.product.id}
-          price={this.state.product.price} />
+          price={this.state.product.price}
+          name={this.state.product.name} />
       </main>
     );
   }

@@ -50,8 +50,11 @@ const VendingMachine = (props) => {
               <RadioGroup aria-label="products" name="products1" value={props.id} onChange={(e) => props.handleChange(e)}>
                 <Grid container component={Paper} className={classes.vendingMachine}>
                   <Grid item xs={12}>
-                    <Typography variant="h5" className="header-message">Price: $ {parseFloat(props.price).toFixed(2)}</Typography>
+                    <Typography variant="h5" className="header-message">
+                      {props.name ? `${props.name}: ` : ''}Price: $ {parseFloat(props.price).toFixed(2)}
+                    </Typography>
                   </Grid>
+                  {/* ... other product rendering ... */}
                   {
                     props.products && props.products.map((product) => <Product key={`Product_${product.id}`} product={product} />)
                   }
