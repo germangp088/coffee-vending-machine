@@ -39,6 +39,8 @@ const useStyles = makeStyles((theme) => ({
 
 const VendingMachine = (props) => {
     const classes = useStyles();
+    const selectedProduct = props.products.find(product => product.id === props.id);
+
     return (
         <div>
           <Grid container component={Paper} className={classes.title} align="center">
@@ -50,6 +52,11 @@ const VendingMachine = (props) => {
               <RadioGroup aria-label="products" name="products1" value={props.id} onChange={(e) => props.handleChange(e)}>
                 <Grid container component={Paper} className={classes.vendingMachine}>
                   <Grid item xs={12}>
+                    {selectedProduct && (
+                      <Typography variant="h6" className="selected-coffee-name">
+                        Selected: {selectedProduct.name}
+                      </Typography>
+                    )}
                     <Typography variant="h5" className="header-message">Price: $ {parseFloat(props.price).toFixed(2)}</Typography>
                   </Grid>
                   {
