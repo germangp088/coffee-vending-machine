@@ -1,4 +1,4 @@
-# Coffee Vending Machine
+# Coffee Vending Machine App
 
 This is a simple coffee vending machine simulation.
 
