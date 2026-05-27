@@ -53,9 +53,14 @@ const VendingMachine = (props) => {
                 <Grid container component={Paper} className={classes.vendingMachine}>
                   <Grid item xs={12}>
                     {selectedProduct && (
-                      <Typography variant="h6" className="selected-coffee-name">
-                        Selected: {selectedProduct.name}
-                      </Typography>
+                      <>
+                        <Typography variant="h6" className="selected-coffee-name">
+                          Selected: {selectedProduct.name}
+                        </Typography>
+                        <Typography variant="subtitle2" color="textSecondary">
+                          Ready for checkout!
+                        </Typography>
+                      </>
                     )}
                     <Typography variant="h5" className="header-message">
                       {props.name ? `${props.name}: ` : ''}Price: $ {parseFloat(props.price).toFixed(2)}
