@@ -35,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
     padding: theme.spacing(2),
   },
+  helperText: {
+    marginTop: theme.spacing(1),
+    textAlign: 'center',
+  },
 }));
 
 const VendingMachine = (props) => {
@@ -69,6 +73,9 @@ const VendingMachine = (props) => {
                     <Button variant="contained" color="primary" className={classes.buttom} onClick={props.handleOnClick}>
                       Buy
                     </Button>
+                    <Typography variant="caption" display="block" className={classes.helperText}>
+                      Click to purchase selected item
+                    </Typography>
                   </Grid>
                 </Grid>
               </RadioGroup>
