@@ -30,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
   buttom: {
     width: '100%'
   },
+  helperNote: {
+    marginTop: theme.spacing(1),
+    color: theme.palette.text.secondary,
+  },
   title: {
     marginBottom: theme.spacing(3),
     marginTop: theme.spacing(3),
@@ -78,8 +82,8 @@ const VendingMachine = (props) => {
                     <Button variant="contained" color="primary" className={classes.buttom} onClick={props.handleOnClick}>
                       Buy
                     </Button>
-                    <Typography variant="caption" display="block" className={classes.helperText}>
-                      Click to purchase selected item
+                    <Typography variant="caption" className={classes.helperNote} display="block" align="center">
+                      Select a coffee, then tap Buy to checkout.
                     </Typography>
                   </Grid>
                 </Grid>
