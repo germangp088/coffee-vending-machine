@@ -64,3 +64,7 @@ docker-compose down
 ## Contributing
 
 Feel free to open issues or pull requests.
+
+### Agent smoke test
+
+This repository was used to verify the local AI dev agent runtime after the Ubuntu migration.
