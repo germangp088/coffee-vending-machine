@@ -29,6 +29,7 @@ class Home extends React.Component {
     this.getProducts = this.getProducts.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
+    this.handleRandomSelection = this.handleRandomSelection.bind(this);
   }
 
   componentDidMount= async() => {
@@ -126,6 +127,18 @@ class Home extends React.Component {
     }
   };
 
+  handleRandomSelection = () => {
+    const { products } = this.state;
+    if (products && products.length > 0) {
+      const randomIndex = Math.floor(Math.random() * products.length);
+      const randomProduct = products[randomIndex];
+      this.setState({
+        product: randomProduct
+      });
+      localStorage.setItem('lastSelectedCoffeeId', randomProduct.id);
+    }
+  };
+
   render() {
     return (
       <main>
@@ -142,6 +155,7 @@ class Home extends React.Component {
         <VendingMachine products={this.state.products}
           handleChange={this.handleChange}
           handleOnClick={this.handleOnClick}
+          handleRandomSelection={this.handleRandomSelection}
           id={this.state.product.id}
           price={this.state.product.price}
           name={this.state.product.name} />

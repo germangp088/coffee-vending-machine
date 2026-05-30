@@ -66,6 +66,11 @@ const VendingMachine = (props) => {
                     props.products && props.products.map((product) => <Product key={`Product_${product.id}`} product={product} />)
                   }
                   <Grid item xs={12}>
+                    <Button variant="contained" color="secondary" className={classes.buttom} onClick={props.handleRandomSelection}>
+                      Suggest Random Coffee
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12}>
                     <Button variant="contained" color="primary" className={classes.buttom} onClick={props.handleOnClick}>
                       Buy
                     </Button>
