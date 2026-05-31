@@ -64,3 +64,5 @@ docker-compose down
 ## Contributing
 
 Feel free to open issues or pull requests.
+
+This repository is also used as a dummy integration target for the Mini PC AI agent.
