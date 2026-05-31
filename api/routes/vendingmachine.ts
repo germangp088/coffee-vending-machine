@@ -26,4 +26,19 @@ router.post('/cash', (req: express.Request, res: express.Response) => {
   }
 });
 
+router.get('/health', (_req: express.Request, res: express.Response) => {
+  res.status(200).json({ status: 'ok', service: 'coffee-vending-machine' });
+});
+
+router.get('/:id', (req: express.Request, res: express.Response) => {
+  const productId = req.params.id;
+  const product = vendingMachine.findProductById(productId);
+
+  if (product) {
+    res.status(200).json(product);
+  } else {
+    res.status(404).end();
+  }
+});
+
 export default router

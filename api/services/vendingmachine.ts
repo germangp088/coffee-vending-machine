@@ -131,4 +131,8 @@ export class VendingMachine {
     set cash(value: string) {
       this._cash = value;
     }
+
+    findProductById(id: string): IProduct | undefined {
+      return this._products.find(product => product.id === id);
+    }
 }
