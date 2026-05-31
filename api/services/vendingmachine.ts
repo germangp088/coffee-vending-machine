@@ -128,6 +128,29 @@ export class VendingMachine {
       return this._cash;
     }
 
+    addCash(value: string | number): boolean {
+      const currentCash = Number(this._cash);
+      const amount = typeof value === 'number' ? value : this.parseAmount(value);
+
+      if (!Number.isFinite(currentCash) || amount === null) {
+        return false;
+      }
+
+      this._cash = (currentCash + amount).toFixed(2);
+      return true;
+    }
+
+    private parseAmount(value: string): number | null {
+      const normalizedValue = value.trim();
+
+      if (normalizedValue === '') {
+        return null;
+      }
+
+      const amount = Number(normalizedValue);
+      return Number.isFinite(amount) ? amount : null;
+    }
+
     set cash(value: string) {
       this._cash = value;
     }

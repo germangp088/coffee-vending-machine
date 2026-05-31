@@ -18,12 +18,12 @@ router.get('/cash', (_req: express.Request, res: express.Response) => {
 });
 
 router.post('/cash', (req: express.Request, res: express.Response) => {
-  if(!req.body.price || isNaN(req.body.price)) {
+  if (!vendingMachine.addCash(req.body.price)) {
     res.status(400).end();
-  } else {
-    vendingMachine.cash = parseFloat(eval(vendingMachine.cash.toString()) + eval(req.body.price)).toFixed(2);
-    res.status(200).json(vendingMachine.cash);
+    return;
   }
+
+  res.status(200).json(vendingMachine.cash);
 });
 
 export default router
