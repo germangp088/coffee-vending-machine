@@ -61,6 +61,10 @@ Remove stopped containers created by Docker Compose:
 docker-compose down
 ```
 
+## Local AI agent smoke test
+
+- The agent uses a safe branch -> validation -> PR workflow.
+
 ## Contributing
 
 Feel free to open issues or pull requests.
